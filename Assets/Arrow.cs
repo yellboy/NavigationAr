@@ -38,7 +38,7 @@ public class Arrow : MonoBehaviour
     {
         objectRenderer = this.gameObject.GetComponent<Renderer>();
 
-        InvokeRepeating(nameof(UpdatePath), 0, 3);
+        InvokeRepeating(nameof(UpdatePath), 0, 1.5f);
     }
 
     private void OnDrawGizmos()
@@ -75,7 +75,7 @@ public class Arrow : MonoBehaviour
         this.transform.position = this.Camera.transform.position + this.Camera.transform.forward * ZDistanceFromCamera + this.Camera.transform.up * YDistanceFromCamera;
 
         var nextCornerDistance = (this.nextCorner - this.Camera.transform.position).magnitude;
-        if (nextCornerDistance < 0.1f)
+        if (nextCornerDistance < 1f)
         {
             nextCornerIndex++;
             nextCorner = path.corners[nextCornerIndex];
