@@ -234,6 +234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 963194225}
   Goal: {fileID: 283203603}
+  ZDistanceFromCamera: 0.5
+  YDistanceFromCamera: 0.1
 --- !u!1 &677514242
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +645,18 @@ PrefabInstance:
     - target: {fileID: 400000, guid: b9979013b18adc147ac208c3520b982e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: b9979013b18adc147ac208c3520b982e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: b9979013b18adc147ac208c3520b982e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: b9979013b18adc147ac208c3520b982e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9979013b18adc147ac208c3520b982e, type: 3}
