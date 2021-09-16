@@ -1,6 +1,5 @@
 # Next steps
 
-* Detect when we reached destination
 * Remove NavMeshAgent
     * It attaches Camera to NavMesh and limits camera movement to NavMesh only
 * Dynamically import spatial mesh and build NavMesh

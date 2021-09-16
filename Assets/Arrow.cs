@@ -78,5 +78,7 @@ public class Arrow : MonoBehaviour
         //this.transform.forward = (Goal.transform.position - this.transform.position).normalized;
         this.transform.forward = (nextCorner - this.Camera.transform.position).normalized;
         this.transform.Rotate(Vector3.right, 90);
+
+        this.objectRenderer.enabled = distance > 0.3f;
     }
 }
