@@ -29,7 +29,6 @@ public class Arrow : MonoBehaviour
     private float DistanceThreshold = 10f;
 
     private Renderer objectRenderer;
-    private NavMeshAgent navMeshAgent;
     private NavMeshPath path;
     private Vector3 nextCorner;
     private int nextCornerIndex;
@@ -39,19 +38,24 @@ public class Arrow : MonoBehaviour
     {
         objectRenderer = this.gameObject.GetComponent<Renderer>();
 
-        this.navMeshAgent = this.Camera.GetComponent<NavMeshAgent>();
-
         InvokeRepeating(nameof(UpdatePath), 0, 3);
+    }
+
+    private void OnDrawGizmos()
+    {
+        foreach (var corner in path.corners)
+        {
+            Gizmos.DrawWireSphere(corner, 0.5f);
+        }
     }
 
     private void UpdatePath()
     {
         path = new NavMeshPath();
-        var found = this.navMeshAgent.CalculatePath(Goal.transform.position, path);
-
+        var found = NavMesh.CalculatePath(this.Camera.transform.position, Goal.transform.position, NavMesh.AllAreas, path);
         if (!found)
         {
-            print("No path");
+            print($"No path. Path status: {path.status}");
             return;
         }
 
@@ -64,6 +68,8 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         var distance = (this.Goal.transform.position - this.Camera.transform.position).magnitude;
+        this.objectRenderer.enabled = distance > 0.3f && path.status != NavMeshPathStatus.PathInvalid;
+
         objectRenderer.material.color = distance > DistanceThreshold ? FarColor : NearColor;
 
         this.transform.position = this.Camera.transform.position + this.Camera.transform.forward * ZDistanceFromCamera + this.Camera.transform.up * YDistanceFromCamera;
@@ -78,7 +84,5 @@ public class Arrow : MonoBehaviour
         //this.transform.forward = (Goal.transform.position - this.transform.position).normalized;
         this.transform.forward = (nextCorner - this.Camera.transform.position).normalized;
         this.transform.Rotate(Vector3.right, 90);
-
-        this.objectRenderer.enabled = distance > 0.3f;
     }
 }
