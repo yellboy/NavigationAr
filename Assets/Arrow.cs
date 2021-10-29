@@ -36,6 +36,10 @@ public class Arrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // limit fps
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 30;
+
         objectRenderer = this.gameObject.GetComponent<Renderer>();
 
         InvokeRepeating(nameof(UpdatePath), 0, 1.5f);
