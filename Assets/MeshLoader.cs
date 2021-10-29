@@ -30,7 +30,9 @@ public class MeshLoader : MonoBehaviour
             createdMeshes.Add(Instantiate(meshPrefab));
         }
 
-        yield return null;
+        yield break;
+
+        /*yield return null;
         yield return null;
 
         NavMeshData navMeshData = new NavMeshData();
@@ -54,6 +56,6 @@ public class MeshLoader : MonoBehaviour
 
         NavMeshBuilder.UpdateNavMeshData(navMeshData, this.navMeshBuildSettings, navMeshBuildSources, bounds);
 
-        NavMesh.AddNavMeshData(navMeshData);
+        NavMesh.AddNavMeshData(navMeshData);*/
     }
 }
