@@ -81,8 +81,11 @@ public class Arrow : MonoBehaviour
         var nextCornerDistance = (this.nextCorner - this.Camera.transform.position).magnitude;
         if (nextCornerDistance < 1f)
         {
-            nextCornerIndex++;
-            nextCorner = path.corners[nextCornerIndex];
+            if (path.corners.Length != 0)
+            {
+                nextCornerIndex++;
+                nextCorner = path.corners[nextCornerIndex];
+            }
         }
 
         //this.transform.forward = (Goal.transform.position - this.transform.position).normalized;
