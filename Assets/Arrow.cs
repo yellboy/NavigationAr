@@ -47,7 +47,7 @@ public class Arrow : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        foreach (var corner in path.corners)
+        foreach (var corner in path?.corners ?? new Vector3[0])
         {
             Gizmos.DrawWireSphere(corner, 0.5f);
         }
