@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using Dummiesman;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MeshLoader : MonoBehaviour
 {
     public GameObject[] meshPrefabs = new GameObject[0];
+    public string objPath;
 
     public NavMeshBuildSettings navMeshBuildSettings = new NavMeshBuildSettings()
     {
@@ -24,38 +27,13 @@ public class MeshLoader : MonoBehaviour
 
     IEnumerator Start()
     {
-        var createdMeshes = new List<GameObject>();
-        foreach (GameObject meshPrefab in meshPrefabs)
-        {
-            createdMeshes.Add(Instantiate(meshPrefab));
-        }
 
+        var loadedObject = new OBJLoader().Load(Path.Combine(Application.streamingAssetsPath, objPath));
+        foreach(Transform child in loadedObject.transform)
+        {
+            child.gameObject.AddComponent<NavMeshSourceTag>();
+        }
+        loadedObject.transform.localScale *= 22;
         yield break;
-
-        /*yield return null;
-        yield return null;
-
-        NavMeshData navMeshData = new NavMeshData();
-        List<NavMeshBuildSource> navMeshBuildSources = new List<NavMeshBuildSource>();
-        Bounds bounds = new Bounds(Vector3.zero, Vector3.one * 100);
-        foreach (GameObject createdMesh in createdMeshes)
-        {
-            MeshFilter[] meshFilters = createdMesh.GetComponentsInChildren<MeshFilter>();
-            foreach (var meshFilter in meshFilters)
-            {
-                var navMeshBuildSource = new NavMeshBuildSource();
-                navMeshBuildSource.shape = NavMeshBuildSourceShape.Mesh;
-                navMeshBuildSource.transform = meshFilter.transform.localToWorldMatrix;
-                navMeshBuildSource.sourceObject = meshFilter.sharedMesh;
-
-                navMeshBuildSources.Add(navMeshBuildSource);
-
-                //bounds.Encapsulate(meshFilter.sharedMesh.bounds);
-            }
-        }
-
-        NavMeshBuilder.UpdateNavMeshData(navMeshData, this.navMeshBuildSettings, navMeshBuildSources, bounds);
-
-        NavMesh.AddNavMeshData(navMeshData);*/
     }
 }

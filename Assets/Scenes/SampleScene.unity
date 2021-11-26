@@ -871,6 +871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshPrefabs:
   - {fileID: 3875264184205496220, guid: f817d832e8598f0459460766ddd13198, type: 3}
+  objPath: HOME-DEU-T_TESTHL2VIS_20210908_141526.183.obj
 --- !u!4 &1626473361
 Transform:
   m_ObjectHideFlags: 0
