@@ -32,6 +32,18 @@ public class AdminExporter : MonoBehaviour
 
     private void OnExportComplete(SerializationCompletionReason completionReason)
     {
+        if (completionReason != SerializationCompletionReason.Succeeded)
+        {
+            // If we have been transferring data and it failed, 
+            // tell the client to discard the data
+            File.WriteAllText(Path.Combine(Application.persistentDataPath, "log.txt"), "Failed, Completeion reason:" + completionReason);
+        }
+        else
+        {
+            // Tell the client that serialization has succeeded. 
+            // The client can start importing once all the data is received.
+            File.WriteAllText(Path.Combine(Application.persistentDataPath, "log.txt"), "Succeeded, Completeion reason:" + completionReason);
+        }
     }
 
     private void OnExportDataAvailable(byte[] data)
